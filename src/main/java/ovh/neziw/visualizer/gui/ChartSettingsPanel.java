@@ -26,6 +26,7 @@ package ovh.neziw.visualizer.gui;
 import java.awt.Color;
 import java.awt.Shape;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -119,6 +120,14 @@ public class ChartSettingsPanel extends JPanel {
 
         final JButton shapeButton = this.createShapeButton();
         this.add(shapeButton);
+
+        final JCheckBox dashedLineCheckBox = new JCheckBox("Linia przerywana", 
+            this.settings.isDashedLine());
+        dashedLineCheckBox.addActionListener(e -> {
+            this.settings.setDashedLine(dashedLineCheckBox.isSelected());
+            this.onSettingsChanged.run();
+        });
+        this.add(dashedLineCheckBox);
     }
 
     private JButton createColorButton(final String text,

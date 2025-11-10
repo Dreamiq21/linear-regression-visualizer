@@ -90,7 +90,15 @@ public class RegressionChart extends JPanel {
         this.renderer.setSeriesLinesVisible(1, true);
         this.renderer.setSeriesShapesVisible(1, false);
         this.renderer.setSeriesPaint(1, this.settings.getRegressionLineColor());
-        this.renderer.setSeriesStroke(1, new BasicStroke(2.0f));
+        
+        final BasicStroke stroke;
+        if (this.settings.isDashedLine()) {
+            stroke = new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 
+                10.0f, new float[]{5.0f, 5.0f}, 0.0f);
+        } else {
+            stroke = new BasicStroke(2.0f);
+        }
+        this.renderer.setSeriesStroke(1, stroke);
     }
 
     public void applySettings() {

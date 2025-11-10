@@ -32,6 +32,7 @@ public class ChartSettings {
     private Color dataPointColor = Color.BLUE;
     private Color regressionLineColor = Color.RED;
     private Shape dataPointShape = new java.awt.geom.Ellipse2D.Double(-3, -3, 6, 6);
+    private boolean dashedLine = false;
 
     public double getPaddingPercent() {
         return this.paddingPercent;
@@ -63,6 +64,14 @@ public class ChartSettings {
 
     public void setDataPointShape(final Shape dataPointShape) {
         this.dataPointShape = dataPointShape;
+    }
+
+    public boolean isDashedLine() {
+        return this.dashedLine;
+    }
+
+    public void setDashedLine(final boolean dashedLine) {
+        this.dashedLine = dashedLine;
     }
 }
 
