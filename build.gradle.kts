@@ -20,7 +20,11 @@ tasks.withType<ShadowJar> {
         "org/intellij/lang/annotations/**",
         "org/jetbrains/annotations/**",
         "org/checkerframework/**",
-        "META-INF/**",
+        "META-INF/DEPENDENCIES",
+        "META-INF/LICENSE",
+        "META-INF/LICENSE.txt",
+        "META-INF/NOTICE",
+        "META-INF/NOTICE.txt",
         "javax/**"
     )
     manifest {
@@ -49,6 +53,8 @@ dependencies {
     implementation("org.jfree:jfreechart:1.5.6")
     implementation("com.formdev:flatlaf:3.6.2")
     implementation("com.google.code.gson:gson:2.13.2")
+    implementation("org.apache.poi:poi:5.4.0")
+    implementation("org.apache.poi:poi-ooxml:5.4.0")
 }
 
 tasks.build {

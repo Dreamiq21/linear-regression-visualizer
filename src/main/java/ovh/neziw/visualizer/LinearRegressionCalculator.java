@@ -61,6 +61,14 @@ public final class LinearRegressionCalculator {
             this.intercept = intercept;
         }
 
+        public double getSlope() {
+            return this.slope;
+        }
+
+        public double getIntercept() {
+            return this.intercept;
+        }
+
         public double predict(final double x) {
             return this.slope * x + this.intercept;
         }

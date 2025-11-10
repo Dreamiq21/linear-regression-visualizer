@@ -35,8 +35,8 @@ public class ChartSettingsData {
     }
 
     public ChartSettingsData(final double paddingPercent, final int dataPointColorRgb,
-                            final int regressionLineColorRgb, final String pointShapeType,
-                            final boolean dashedLine) {
+                             final int regressionLineColorRgb, final String pointShapeType,
+                             final boolean dashedLine) {
         this.paddingPercent = paddingPercent;
         this.dataPointColorRgb = dataPointColorRgb;
         this.regressionLineColorRgb = regressionLineColorRgb;

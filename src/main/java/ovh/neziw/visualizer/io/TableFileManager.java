@@ -31,7 +31,6 @@ import ovh.neziw.visualizer.DataTableModel;
 import ovh.neziw.visualizer.gui.ChartSettings;
 import ovh.neziw.visualizer.gui.FileDialogManager;
 import ovh.neziw.visualizer.serialization.ChartSettingsConverter;
-import ovh.neziw.visualizer.serialization.ChartSettingsData;
 import ovh.neziw.visualizer.serialization.JsonDataSerializer;
 import ovh.neziw.visualizer.serialization.SavedData;
 
@@ -81,11 +80,11 @@ public class TableFileManager {
         try {
             final SavedData savedData = this.serializer.readFromFile(file);
             this.tableModel.setAllDataPoints(savedData.getDataPoints());
-            
+
             if (savedData.getChartSettings() != null) {
                 ChartSettingsConverter.applyToSettings(savedData.getChartSettings(), this.chartSettings);
             }
-            
+
             this.onDataLoaded.run();
             this.showSuccessMessage(parentFrame,
                 "Dane zostały wczytane z pliku: " + file.getName());

@@ -122,7 +122,7 @@ public class ChartSettingsPanel extends JPanel {
         final JButton shapeButton = this.createShapeButton();
         this.add(shapeButton);
 
-        this.dashedLineCheckBox = new JCheckBox("Linia przerywana", 
+        this.dashedLineCheckBox = new JCheckBox("Linia przerywana",
             this.settings.isDashedLine());
         this.dashedLineCheckBox.addActionListener(e -> {
             this.settings.setDashedLine(this.dashedLineCheckBox.isSelected());

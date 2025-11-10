@@ -22,8 +22,31 @@
 - [Requirements](#-requirements)
 - [Quick Start](#-quick-start)
 - [Usage](#-usage)
-- [Building](#-building)
 - [License](#-license)
+
+---
+
+<div align="center">
+
+## 🎉 What's New
+
+### 📊 Excel Export Support
+
+Export your data and regression analysis directly to **Excel (.xlsx)** files! 
+
+### ✨ **Features:**
+
+📈 **Visual Charts** - Automatically generated scatter plots with regression lines
+
+📋 **Data Sheets** - Complete data tables with all your X and Y values
+
+📊 **Regression Parameters** - Detailed regression statistics (intercept, slope, R²)
+
+🎨 **Professional Formatting** - Ready-to-present Excel files with styled charts
+
+`The exported Excel files include both raw data and beautiful visualizations, making it perfect for reports and presentations!`
+
+</div>
 
 ---
 
@@ -38,6 +61,7 @@
 - 📊 **Auto Calculation** - Automatic regression line calculation (minimum 2 points)
 - 🟢 **Colors Selection** - Customizable colors for data points and regression line
 - 💫 **Symbol Selection** - Choose your favourite symbol for data points
+- 📐 **Excel Export** - Export data and charts to Excel (.xlsx) files
 
 ---
 
@@ -90,8 +114,9 @@
 
 - **Delete Values**: Select cells and press `Delete` or `Backspace`
 - **Move Values**: Select cells, drag to another location, and drop
-- **Save Data**: Click "Zapisz do pliku" to save data as JSON
+- **Save Data**: Click "Zapisz do pliku" to save data as JSON (includes chart settings)
 - **Load Data**: Click "Załaduj z pliku" to load data from JSON file
+- **Export to Excel**: Click "Eksportuj do Excela" to export data and charts to Excel (.xlsx)
 
 ### Chart Features
 
@@ -112,6 +137,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with [JFreeChart](https://www.jfree.org/jfreechart/) for chart visualization
 - GUI powered by [FlatLaf](https://www.formdev.com/flatlaf/)
 - JSON handling with [Gson](https://github.com/google/gson)
+- Excel export powered by [Apache POI](https://poi.apache.org/)
 
 ---
 

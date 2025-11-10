@@ -41,6 +41,7 @@ import ovh.neziw.visualizer.gui.ChartUpdater;
 import ovh.neziw.visualizer.gui.FileDialogManager;
 import ovh.neziw.visualizer.gui.TableConfiguration;
 import ovh.neziw.visualizer.gui.UIManagerConfigurator;
+import ovh.neziw.visualizer.io.ExcelExportManager;
 import ovh.neziw.visualizer.io.TableFileManager;
 
 public class RegressionVisualizer extends JFrame {
@@ -50,6 +51,7 @@ public class RegressionVisualizer extends JFrame {
     private final RegressionChart chart;
     private final ChartUpdater chartUpdater;
     private final TableFileManager fileManager;
+    private final ExcelExportManager excelExportManager;
     private final ChartSettings chartSettings;
     private final ChartSettingsPanel settingsPanel;
 
@@ -62,7 +64,9 @@ public class RegressionVisualizer extends JFrame {
         this.chartUpdater = new ChartUpdater(this.tableModel, this.chart);
         this.setupTableListeners();
         this.settingsPanel = this.createSettingsPanel();
-        this.fileManager = this.createFileManager();
+        final FileDialogManager dialogManager = new FileDialogManager(this);
+        this.fileManager = this.createFileManager(dialogManager);
+        this.excelExportManager = this.createExcelExportManager(dialogManager);
         this.setupUI();
     }
 
@@ -89,9 +93,12 @@ public class RegressionVisualizer extends JFrame {
         return table;
     }
 
-    private TableFileManager createFileManager() {
-        final FileDialogManager dialogManager = new FileDialogManager(this);
+    private TableFileManager createFileManager(final FileDialogManager dialogManager) {
         return new TableFileManager(this.tableModel, dialogManager, this::onDataLoaded, this.chartSettings);
+    }
+
+    private ExcelExportManager createExcelExportManager(final FileDialogManager dialogManager) {
+        return new ExcelExportManager(this.tableModel, dialogManager);
     }
 
     private void onDataLoaded() {
@@ -154,7 +161,8 @@ public class RegressionVisualizer extends JFrame {
     private ButtonPanel createButtonPanel() {
         return new ButtonPanel(
             () -> this.fileManager.saveToFile(this),
-            () -> this.fileManager.loadFromFile(this)
+            () -> this.fileManager.loadFromFile(this),
+            () -> this.excelExportManager.exportToExcel(this)
         );
     }
 

@@ -24,18 +24,37 @@
 package ovh.neziw.visualizer.gui;
 
 import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class ButtonPanel extends JPanel {
 
-    public ButtonPanel(final Runnable onSave, final Runnable onLoad) {
+    public ButtonPanel(final Runnable onSave, final Runnable onLoad, final Runnable onExport) {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         final JButton saveButton = new JButton("Zapisz do pliku");
         saveButton.addActionListener(e -> onSave.run());
         final JButton loadButton = new JButton("Załaduj z pliku");
         loadButton.addActionListener(e -> onLoad.run());
+        final JButton exportButton = new JButton("Eksportuj do Excela");
+        final ImageIcon excelIcon = this.loadExcelIcon();
+        if (excelIcon != null) {
+            exportButton.setIcon(excelIcon);
+        }
+        exportButton.addActionListener(e -> onExport.run());
         this.add(saveButton);
         this.add(loadButton);
+        this.add(exportButton);
+    }
+
+    private ImageIcon loadExcelIcon() {
+        try {
+            final java.net.URL iconUrl = ButtonPanel.class.getResource("/excel.png");
+            if (iconUrl != null) {
+                return new ImageIcon(iconUrl);
+            }
+        } catch (final Exception exception) {
+        }
+        return null;
     }
 }

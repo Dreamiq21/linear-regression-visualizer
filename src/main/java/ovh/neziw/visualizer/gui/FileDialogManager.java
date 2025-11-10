@@ -33,6 +33,9 @@ public class FileDialogManager {
     private static final String JSON_EXTENSION = "json";
     private static final String JSON_DESCRIPTION = "Pliki JSON (*.json)";
     private static final String DEFAULT_FILENAME = "dane.json";
+    private static final String EXCEL_EXTENSION = "xlsx";
+    private static final String EXCEL_DESCRIPTION = "Pliki Excel (*.xlsx)";
+    private static final String DEFAULT_EXCEL_FILENAME = "dane.xlsx";
 
     private final JFrame parentFrame;
 
@@ -68,9 +71,29 @@ public class FileDialogManager {
         return fileChooser;
     }
 
+    public File showExcelSaveDialog() {
+        final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter(EXCEL_DESCRIPTION, EXCEL_EXTENSION));
+        fileChooser.setDialogTitle("Eksportuj do Excela");
+        fileChooser.setSelectedFile(new File(DEFAULT_EXCEL_FILENAME));
+        final int result = fileChooser.showSaveDialog(this.parentFrame);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            final File file = fileChooser.getSelectedFile();
+            return this.ensureExcelExtension(file);
+        }
+        return null;
+    }
+
     private File ensureJsonExtension(final File file) {
         if (!file.getName().toLowerCase().endsWith("." + JSON_EXTENSION)) {
             return new File(file.getParent(), file.getName() + "." + JSON_EXTENSION);
+        }
+        return file;
+    }
+
+    private File ensureExcelExtension(final File file) {
+        if (!file.getName().toLowerCase().endsWith("." + EXCEL_EXTENSION)) {
+            return new File(file.getParent(), file.getName() + "." + EXCEL_EXTENSION);
         }
         return file;
     }

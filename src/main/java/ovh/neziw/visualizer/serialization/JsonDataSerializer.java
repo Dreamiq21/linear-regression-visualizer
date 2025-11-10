@@ -54,7 +54,7 @@ public class JsonDataSerializer {
 
     public SavedData deserialize(final String json) throws IOException {
         final JsonElement jsonElement = JsonParser.parseString(json);
-        
+
         if (jsonElement.isJsonArray()) {
             final Type listType = new TypeToken<List<DataTableModel.DataPoint>>() {
             }.getType();
