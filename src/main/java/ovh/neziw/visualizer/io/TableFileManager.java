@@ -25,12 +25,15 @@ package ovh.neziw.visualizer.io;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ovh.neziw.visualizer.DataTableModel;
+import ovh.neziw.visualizer.gui.ChartSettings;
 import ovh.neziw.visualizer.gui.FileDialogManager;
+import ovh.neziw.visualizer.serialization.ChartSettingsConverter;
+import ovh.neziw.visualizer.serialization.ChartSettingsData;
 import ovh.neziw.visualizer.serialization.JsonDataSerializer;
+import ovh.neziw.visualizer.serialization.SavedData;
 
 public class TableFileManager {
 
@@ -38,14 +41,17 @@ public class TableFileManager {
     private final JsonDataSerializer serializer;
     private final FileDialogManager dialogManager;
     private final Runnable onDataLoaded;
+    private final ChartSettings chartSettings;
 
     public TableFileManager(final DataTableModel tableModel,
                             final FileDialogManager dialogManager,
-                            final Runnable onDataLoaded) {
+                            final Runnable onDataLoaded,
+                            final ChartSettings chartSettings) {
         this.tableModel = tableModel;
         this.serializer = new JsonDataSerializer();
         this.dialogManager = dialogManager;
         this.onDataLoaded = onDataLoaded;
+        this.chartSettings = chartSettings;
     }
 
     public void saveToFile(final JFrame parentFrame) {
@@ -54,8 +60,11 @@ public class TableFileManager {
             return;
         }
         try {
-            final List<DataTableModel.DataPoint> dataPoints = this.tableModel.getAllDataPoints();
-            this.serializer.writeToFile(file, dataPoints);
+            final SavedData savedData = new SavedData(
+                this.tableModel.getAllDataPoints(),
+                ChartSettingsConverter.toData(this.chartSettings)
+            );
+            this.serializer.writeToFile(file, savedData);
             this.showSuccessMessage(parentFrame,
                 "Dane zostały zapisane do pliku: " + file.getName());
         } catch (final IOException exception) {
@@ -70,8 +79,13 @@ public class TableFileManager {
             return;
         }
         try {
-            final List<DataTableModel.DataPoint> dataPoints = this.serializer.readFromFile(file);
-            this.tableModel.setAllDataPoints(dataPoints);
+            final SavedData savedData = this.serializer.readFromFile(file);
+            this.tableModel.setAllDataPoints(savedData.getDataPoints());
+            
+            if (savedData.getChartSettings() != null) {
+                ChartSettingsConverter.applyToSettings(savedData.getChartSettings(), this.chartSettings);
+            }
+            
             this.onDataLoaded.run();
             this.showSuccessMessage(parentFrame,
                 "Dane zostały wczytane z pliku: " + file.getName());

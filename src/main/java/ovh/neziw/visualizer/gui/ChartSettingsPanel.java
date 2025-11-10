@@ -41,6 +41,7 @@ public class ChartSettingsPanel extends JPanel {
     private JSpinner paddingSpinner;
     private JButton dataPointColorButton;
     private JButton regressionLineColorButton;
+    private JCheckBox dashedLineCheckBox;
 
     public ChartSettingsPanel(final ChartSettings settings, final Runnable onSettingsChanged) {
         this.settings = settings;
@@ -121,13 +122,19 @@ public class ChartSettingsPanel extends JPanel {
         final JButton shapeButton = this.createShapeButton();
         this.add(shapeButton);
 
-        final JCheckBox dashedLineCheckBox = new JCheckBox("Linia przerywana", 
+        this.dashedLineCheckBox = new JCheckBox("Linia przerywana", 
             this.settings.isDashedLine());
-        dashedLineCheckBox.addActionListener(e -> {
-            this.settings.setDashedLine(dashedLineCheckBox.isSelected());
+        this.dashedLineCheckBox.addActionListener(e -> {
+            this.settings.setDashedLine(this.dashedLineCheckBox.isSelected());
             this.onSettingsChanged.run();
         });
-        this.add(dashedLineCheckBox);
+        this.add(this.dashedLineCheckBox);
+    }
+
+    public void refreshUI() {
+        this.paddingSpinner.setValue(this.settings.getPaddingPercent() * 100.0);
+        this.updateButtonColors();
+        this.dashedLineCheckBox.setSelected(this.settings.isDashedLine());
     }
 
     private JButton createColorButton(final String text,

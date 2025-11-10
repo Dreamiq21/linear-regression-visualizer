@@ -51,6 +51,7 @@ public class RegressionVisualizer extends JFrame {
     private final ChartUpdater chartUpdater;
     private final TableFileManager fileManager;
     private final ChartSettings chartSettings;
+    private final ChartSettingsPanel settingsPanel;
 
     public RegressionVisualizer() {
         this.initializeFrame();
@@ -59,8 +60,9 @@ public class RegressionVisualizer extends JFrame {
         this.dataTable = this.createTable();
         this.chart = new RegressionChart(this.chartSettings);
         this.chartUpdater = new ChartUpdater(this.tableModel, this.chart);
-        this.fileManager = this.createFileManager();
         this.setupTableListeners();
+        this.settingsPanel = this.createSettingsPanel();
+        this.fileManager = this.createFileManager();
         this.setupUI();
     }
 
@@ -89,7 +91,15 @@ public class RegressionVisualizer extends JFrame {
 
     private TableFileManager createFileManager() {
         final FileDialogManager dialogManager = new FileDialogManager(this);
-        return new TableFileManager(this.tableModel, dialogManager, this::updateChart);
+        return new TableFileManager(this.tableModel, dialogManager, this::onDataLoaded, this.chartSettings);
+    }
+
+    private void onDataLoaded() {
+        if (this.settingsPanel != null) {
+            this.settingsPanel.refreshUI();
+        }
+        this.chart.applySettings();
+        this.updateChart();
     }
 
     private void setupTableListeners() {
@@ -105,11 +115,10 @@ public class RegressionVisualizer extends JFrame {
         final JScrollPane tableScrollPane = this.createTableScrollPane();
         final JSplitPane splitPane = this.createSplitPane(tableScrollPane);
         final ButtonPanel buttonPanel = this.createButtonPanel();
-        final ChartSettingsPanel settingsPanel = this.createSettingsPanel();
 
         final JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonPanel, BorderLayout.WEST);
-        topPanel.add(settingsPanel, BorderLayout.CENTER);
+        topPanel.add(this.settingsPanel, BorderLayout.CENTER);
 
         final JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(topPanel, BorderLayout.NORTH);
@@ -123,7 +132,7 @@ public class RegressionVisualizer extends JFrame {
     private ChartSettingsPanel createSettingsPanel() {
         return new ChartSettingsPanel(this.chartSettings, () -> {
             this.chart.applySettings();
-            this.chartUpdater.updateChart();
+            this.updateChart();
         });
     }
 

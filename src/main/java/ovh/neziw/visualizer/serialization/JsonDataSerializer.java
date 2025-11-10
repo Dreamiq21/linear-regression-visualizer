@@ -25,6 +25,8 @@ package ovh.neziw.visualizer.serialization;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,28 +48,40 @@ public class JsonDataSerializer {
             .create();
     }
 
-    public String serialize(final List<DataTableModel.DataPoint> dataPoints) {
-        return this.gson.toJson(dataPoints);
+    public String serialize(final SavedData savedData) {
+        return this.gson.toJson(savedData);
     }
 
-    public List<DataTableModel.DataPoint> deserialize(final String json) throws IOException {
-        final Type listType = new TypeToken<List<DataTableModel.DataPoint>>() {
-        }.getType();
-        final List<DataTableModel.DataPoint> dataPoints = this.gson.fromJson(json, listType);
-        if (dataPoints == null) {
-            throw new IOException("Plik jest pusty lub ma nieprawidłowy format");
+    public SavedData deserialize(final String json) throws IOException {
+        final JsonElement jsonElement = JsonParser.parseString(json);
+        
+        if (jsonElement.isJsonArray()) {
+            final Type listType = new TypeToken<List<DataTableModel.DataPoint>>() {
+            }.getType();
+            final List<DataTableModel.DataPoint> dataPoints = this.gson.fromJson(jsonElement, listType);
+            if (dataPoints == null) {
+                throw new IOException("Plik jest pusty lub ma nieprawidłowy format");
+            }
+            return new SavedData(dataPoints, null);
+        } else if (jsonElement.isJsonObject()) {
+            final SavedData savedData = this.gson.fromJson(jsonElement, SavedData.class);
+            if (savedData == null || savedData.getDataPoints() == null) {
+                throw new IOException("Plik jest pusty lub ma nieprawidłowy format");
+            }
+            return savedData;
+        } else {
+            throw new IOException("Plik ma nieprawidłowy format JSON");
         }
-        return dataPoints;
     }
 
-    public void writeToFile(final File file, final List<DataTableModel.DataPoint> dataPoints) throws IOException {
-        final String json = this.serialize(dataPoints);
+    public void writeToFile(final File file, final SavedData savedData) throws IOException {
+        final String json = this.serialize(savedData);
         try (final FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
             writer.write(json);
         }
     }
 
-    public List<DataTableModel.DataPoint> readFromFile(final File file) throws IOException {
+    public SavedData readFromFile(final File file) throws IOException {
         final String json = this.readFileContent(file);
         return this.deserialize(json);
     }
